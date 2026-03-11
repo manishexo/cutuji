@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Question For You</title>
+<title>A Question For You ❤️</title>
 
 <style>
 
 body{
 margin:0;
-font-family: 'Poppins', sans-serif;
-background: linear-gradient(135deg,#ff758c,#ff7eb3);
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
 overflow:hidden;
 text-align:center;
 color:white;
@@ -30,13 +30,20 @@ margin-bottom:10px;
 #typing{
 font-size:1.4em;
 min-height:40px;
+width:80%;
+margin:auto;
 }
 
 img{
-width:230px;
+width:240px;
 border-radius:20px;
 margin-top:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
+transition:0.4s;
+}
+
+img:hover{
+transform:scale(1.05);
 }
 
 .buttons{
@@ -50,12 +57,17 @@ border:none;
 border-radius:40px;
 cursor:pointer;
 margin:10px;
-transition:0.2s;
+transition:0.25s;
 }
 
 #yes{
 background:#ff2e63;
 color:white;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+#yes:hover{
+transform:scale(1.1);
 }
 
 #no{
@@ -63,8 +75,9 @@ background:white;
 }
 
 #message{
-font-size:28px;
+font-size:32px;
 margin-top:30px;
+font-weight:bold;
 }
 
 .heart{
@@ -72,7 +85,7 @@ position:absolute;
 color:white;
 font-size:20px;
 animation:float 8s linear infinite;
-opacity:0.7;
+opacity:0.8;
 }
 
 @keyframes float{
@@ -84,7 +97,6 @@ opacity:0.7;
 position:absolute;
 width:10px;
 height:10px;
-background:white;
 animation:fall 3s linear forwards;
 }
 
@@ -97,6 +109,10 @@ animation:fall 3s linear forwards;
 </head>
 
 <body>
+
+<audio id="music" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <div class="container">
 
@@ -122,7 +138,7 @@ and let me be your <b>cameraman forever</b>?
 
 <script>
 
-const text="Every moment with you feels like a perfect picture... and I want to capture a lifetime of them with you.";
+const text="Every moment with you feels like a perfect picture and I want to capture a lifetime of them with you";
 let i=0;
 
 function type(){
@@ -137,22 +153,34 @@ type();
 const yes=document.getElementById("yes");
 const no=document.getElementById("no");
 const message=document.getElementById("message");
+const music=document.getElementById("music");
 
 yes.onclick=()=>{
-message.innerHTML="You just made me the happiest cameraman alive 📸❤️";
 
-for(let i=0;i<150;i++){
+music.play();
+
+message.innerHTML="I LOVE U CUTU ❤️📸";
+
+for(let i=0;i<180;i++){
+
 let conf=document.createElement("div");
+
 conf.className="confetti";
+
 conf.style.left=Math.random()*100+"vw";
+
 conf.style.background=`hsl(${Math.random()*360},100%,70%)`;
+
 document.body.appendChild(conf);
+
 }
+
 };
 
 let attempts=0;
 
 function moveNo(){
+
 attempts++;
 
 let x=Math.random()*(window.innerWidth-120);
@@ -163,30 +191,38 @@ no.style.left=x+"px";
 no.style.top=y+"px";
 
 if(attempts>5){
-no.innerHTML="Are you sure? 😳";
+no.innerHTML="Are you sure 😳";
 }
 
 if(attempts>8){
-no.innerHTML="Fine... YES ❤️";
+no.innerHTML="Fine YES ❤️";
 }
 
 if(attempts>10){
 yes.click();
 }
+
 }
 
 no.addEventListener("mouseover",moveNo);
 no.addEventListener("click",moveNo);
 
 function createHeart(){
+
 let heart=document.createElement("div");
+
 heart.className="heart";
+
 heart.innerHTML="❤";
+
 heart.style.left=Math.random()*100+"vw";
+
 heart.style.fontSize=(Math.random()*20+10)+"px";
+
 document.body.appendChild(heart);
 
 setTimeout(()=>heart.remove(),8000);
+
 }
 
 setInterval(createHeart,300);
