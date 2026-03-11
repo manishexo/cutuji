@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +6,6 @@
 <title>A Question For You ❤️</title>
 
 <style>
-
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
@@ -105,7 +103,6 @@ animation:fall 3s linear forwards;
 0%{transform:translateY(-20px);}
 100%{transform:translateY(100vh);}
 }
-
 </style>
 
 </head>
@@ -113,7 +110,6 @@ animation:fall 3s linear forwards;
 <body>
 
 <!-- Background music -->
-
 <audio id="music" autoplay loop>
 <source src="song.mp3" type="audio/mpeg">
 </audio>
@@ -141,16 +137,15 @@ and let me be your <b>cameraman forever</b>?
 </div>
 
 <script>
-
+// Typing effect
 const text="I HAVE STARTED TO SMILE A BIT MORE SINCE CAME MA PUNTUUUU I WANT THIS TO BE FOREVERRRRRRRR";
 let i=0;
-
 function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(type,40);
-}
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,40);
+  }
 }
 type();
 
@@ -159,77 +154,52 @@ const no=document.getElementById("no");
 const message=document.getElementById("message");
 const music=document.getElementById("music");
 
+// Ensure music plays immediately
+window.addEventListener("load", ()=>{
+    music.currentTime=0;
+    music.play().catch(()=>{}); // In case browser blocks autoplay
+});
+
+// YES button click
 yes.onclick=()=>{
-
-music.currentTime=0;
-music.play();
-
-message.innerHTML="I LOVE U CUTU ❤️📸";
-
-for(let i=0;i<180;i++){
-
-let conf=document.createElement("div");
-
-conf.className="confetti";
-
-conf.style.left=Math.random()*100+"vw";
-
-conf.style.background=`hsl(${Math.random()*360},100%,70%)`;
-
-document.body.appendChild(conf);
-
-}
-
+    music.currentTime=0;
+    music.play();
+    message.innerHTML="I LOVE U CUTU ❤️📸";
+    for(let i=0;i<180;i++){
+        let conf=document.createElement("div");
+        conf.className="confetti";
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.background=`hsl(${Math.random()*360},100%,70%)`;
+        document.body.appendChild(conf);
+    }
 };
 
+// NO button escape
 let attempts=0;
-
 function moveNo(){
-
-attempts++;
-
-let x=Math.random()*(window.innerWidth-120);
-let y=Math.random()*(window.innerHeight-60);
-
-no.style.position="absolute";
-no.style.left=x+"px";
-no.style.top=y+"px";
-
-if(attempts>5){
-no.innerHTML="Are you sure 😳";
+    attempts++;
+    let x=Math.random()*(window.innerWidth-120);
+    let y=Math.random()*(window.innerHeight-60);
+    no.style.position="absolute";
+    no.style.left=x+"px";
+    no.style.top=y+"px";
+    if(attempts>5){ no.innerHTML="Are you sure 😳"; }
+    if(attempts>8){ no.innerHTML="Fine YES ❤️"; }
+    if(attempts>10){ yes.click(); }
 }
-
-if(attempts>8){
-no.innerHTML="Fine YES ❤️";
-}
-
-if(attempts>10){
-yes.click();
-}
-
-}
-
 no.addEventListener("mouseover",moveNo);
 no.addEventListener("click",moveNo);
 
+// Floating hearts
 function createHeart(){
-
-let heart=document.createElement("div");
-
-heart.className="heart";
-
-heart.innerHTML="❤";
-
-heart.style.left=Math.random()*100+"vw";
-
-heart.style.fontSize=(Math.random()*20+10)+"px";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),8000);
-
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),8000);
 }
-
 setInterval(createHeart,300);
 
 </script>
