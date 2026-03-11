@@ -15,6 +15,14 @@ text-align:center;
 color:white;
 }
 
+#overlay{
+position:fixed;
+top:0; left:0;
+width:100vw; height:100vh;
+z-index:999;
+cursor:pointer;
+}
+
 .container{
 margin-top:40px;
 position:relative;
@@ -41,13 +49,9 @@ box-shadow:0 15px 40px rgba(0,0,0,0.4);
 transition:0.4s;
 }
 
-img:hover{
-transform:scale(1.05);
-}
+img:hover{ transform:scale(1.05); }
 
-.buttons{
-margin-top:40px;
-}
+.buttons{ margin-top:40px; }
 
 button{
 padding:15px 35px;
@@ -59,71 +63,35 @@ margin:10px;
 transition:0.25s;
 }
 
-#yes{
-background:#ff2e63;
-color:white;
-box-shadow:0 5px 20px rgba(0,0,0,0.3);
-}
+#yes{ background:#ff2e63; color:white; box-shadow:0 5px 20px rgba(0,0,0,0.3); }
+#yes:hover{ transform:scale(1.1); }
+#no{ background:white; }
 
-#yes:hover{
-transform:scale(1.1);
-}
+#message{ font-size:32px; margin-top:30px; font-weight:bold; }
 
-#no{
-background:white;
-}
-
-#message{
-font-size:32px;
-margin-top:30px;
-font-weight:bold;
-}
-
-.heart{
-position:absolute;
-color:white;
-font-size:20px;
-animation:float 8s linear infinite;
-opacity:0.8;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-10vh);}
-}
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-animation:fall 3s linear forwards;
-}
-
-@keyframes fall{
-0%{transform:translateY(-20px);}
-100%{transform:translateY(100vh);}
-}
+.heart{ position:absolute; color:white; font-size:20px; animation:float 8s linear infinite; opacity:0.8; }
+@keyframes float{0%{transform:translateY(100vh);}100%{transform:translateY(-10vh);}}
+.confetti{position:absolute;width:10px;height:10px;animation:fall 3s linear forwards;}
+@keyframes fall{0%{transform:translateY(-20px);}100%{transform:translateY(100vh);}}
 </style>
-
 </head>
 
 <body>
 
+<!-- Invisible overlay to allow autoplay -->
+<div id="overlay"></div>
+
 <!-- Background music -->
-<audio id="music" autoplay loop>
+<audio id="music" loop>
 <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
-
 <h1>HIIIIIIII CUTUUUUUUUUUUUUUUU </h1>
-
 <div id="typing"></div>
-
 <img src="her.jpg">
-
 <h2 style="margin-top:30px">
-Will you be my <b>model for life</b> 📸  
+Will you be my <b>model for life</b> 📸<br>
 and let me be your <b>cameraman forever</b>?
 </h2>
 
@@ -133,34 +101,33 @@ and let me be your <b>cameraman forever</b>?
 </div>
 
 <div id="message"></div>
-
 </div>
 
 <script>
 // Typing effect
 const text="I HAVE STARTED TO SMILE A BIT MORE SINCE CAME MA PUNTUUUU I WANT THIS TO BE FOREVERRRRRRRR";
 let i=0;
-function type(){
-  if(i<text.length){
-    document.getElementById("typing").innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(type,40);
-  }
-}
+function type(){ if(i<text.length){ document.getElementById("typing").innerHTML+=text.charAt(i); i++; setTimeout(type,40);} }
 type();
 
 const yes=document.getElementById("yes");
 const no=document.getElementById("no");
 const message=document.getElementById("message");
 const music=document.getElementById("music");
+const overlay=document.getElementById("overlay");
 
-// Ensure music plays immediately
-window.addEventListener("load", ()=>{
+// Remove overlay on first interaction to allow music autoplay
+function startMusic(){
     music.currentTime=0;
-    music.play().catch(()=>{}); // In case browser blocks autoplay
-});
+    music.play();
+    overlay.style.display="none";
+    document.removeEventListener('click', startMusic);
+    document.removeEventListener('touchstart', startMusic);
+}
+document.addEventListener('click', startMusic);
+document.addEventListener('touchstart', startMusic);
 
-// YES button click
+// YES button
 yes.onclick=()=>{
     music.currentTime=0;
     music.play();
@@ -203,6 +170,5 @@ function createHeart(){
 setInterval(createHeart,300);
 
 </script>
-
 </body>
 </html>
