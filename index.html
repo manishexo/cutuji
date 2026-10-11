@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,169 +7,286 @@
 <title>A Question For You ❤️</title>
 
 <style>
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
-overflow:hidden;
-text-align:center;
-color:white;
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    color: white;
+    min-height: 100vh;
 }
 
-#overlay{
-position:fixed;
-top:0; left:0;
-width:100vw; height:100vh;
-z-index:999;
-cursor:pointer;
+#overlay {
+    display: none;
 }
 
-.container{
-margin-top:40px;
-position:relative;
-z-index:2;
+.container {
+    margin: 0 auto;
+    padding: 30px 15px 50px;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-h1{
-font-size:3em;
-margin-bottom:10px;
+h1 {
+    font-size: clamp(1.7em, 6vw, 3em);
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
 }
 
-#typing{
-font-size:1.4em;
-min-height:40px;
-width:80%;
-margin:auto;
+#typing {
+    font-size: clamp(1em, 4vw, 1.4em);
+    min-height: 40px;
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    overflow-wrap: anywhere;
 }
 
-img{
-width:240px;
-border-radius:20px;
-margin-top:20px;
-box-shadow:0 15px 40px rgba(0,0,0,0.4);
-transition:0.4s;
+img {
+    width: min(240px, 75vw);
+    max-width: 100%;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    transition: 0.4s;
 }
 
-img:hover{ transform:scale(1.05); }
-
-.buttons{ margin-top:40px; }
-
-button{
-padding:15px 35px;
-font-size:20px;
-border:none;
-border-radius:40px;
-cursor:pointer;
-margin:10px;
-transition:0.25s;
+img:hover {
+    transform: scale(1.05);
 }
 
-#yes{ background:#ff2e63; color:white; box-shadow:0 5px 20px rgba(0,0,0,0.3); }
-#yes:hover{ transform:scale(1.1); }
-#no{ background:white; }
+.buttons {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: relative;
+    z-index: 1000;
+    min-height: 65px;
+}
 
-#message{ font-size:32px; margin-top:30px; font-weight:bold; }
+button {
+    padding: 15px 35px;
+    font-size: 20px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.25s;
+    position: relative;
+    z-index: 1001;
+    touch-action: manipulation;
+}
 
-.heart{ position:absolute; color:white; font-size:20px; animation:float 8s linear infinite; opacity:0.8; }
-@keyframes float{0%{transform:translateY(100vh);}100%{transform:translateY(-10vh);}}
-.confetti{position:absolute;width:10px;height:10px;animation:fall 3s linear forwards;}
-@keyframes fall{0%{transform:translateY(-20px);}100%{transform:translateY(100vh);}}
+#yes {
+    background: #ff2e63;
+    color: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+#yes:hover {
+    transform: scale(1.1);
+}
+
+#no {
+    background: white;
+    color: #ff2e63;
+}
+
+#message {
+    font-size: clamp(1.3em, 5vw, 32px);
+    margin-top: 30px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+    position: relative;
+    z-index: 2;
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    color: white;
+    font-size: 20px;
+    animation: float 8s linear infinite;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-110vh);
+    }
+}
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 10px;
+    animation: fall 3s linear forwards;
+    pointer-events: none;
+    z-index: 2000;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding-top: 25px;
+    }
+
+    button {
+        padding: 13px 26px;
+        font-size: 18px;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- Invisible overlay to allow autoplay -->
 <div id="overlay"></div>
 
-<!-- Background music -->
 <audio id="music" loop>
-<source src="song.mp3" type="audio/mpeg">
+    <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
-<h1>HIIIIIIII CUTUUUUUUUUUUUUUUU </h1>
-<div id="typing"></div>
-<img src="her.jpg">
-<h2 style="margin-top:30px">
-WOULD YOU LIKE TO TRVAELLLLL<b>THE WHOLE WORLDDD</b> 📸<br>
-WITHHHHHH MEEEEEE</b>?
-</h2>
 
-<div class="buttons">
-<button id="yes">YES ❤️</button>
-<button id="no">NO 🙈</button>
-</div>
+    <h1>HIIIIIIII CUTUUUUUUUUUUUUUUU</h1>
 
-<div id="message"></div>
+    <div id="typing"></div>
+
+    <img src="her.jpg" alt="A special person">
+
+    <h2 style="margin-top:30px">
+        WOULD YOU LIKE TO TRVAELLLLL
+        <b>THE WHOLE WORLDDD</b> 📸<br>
+        WITHHHHHH MEEEEEE?
+    </h2>
+
+    <div class="buttons">
+        <button id="yes" type="button">YES ❤️</button>
+        <button id="no" type="button">NO 🙈</button>
+    </div>
+
+    <div id="message"></div>
+
 </div>
 
 <script>
-// Typing effect
-const text="I HAVE STARTED TO SMILE A LOT SINCE THE DAY SUHUUUUU CAME IN MY LIFEEEEEEEEEEE I HOPE THIS LASTSSS FOREVERRRRRR";
-let i=0;
-function type(){ if(i<text.length){ document.getElementById("typing").innerHTML+=text.charAt(i); i++; setTimeout(type,40);} }
+const text = "I HAVE STARTED TO SMILE A LOT SINCE THE DAY SUHUUUUU CAME IN MY LIFEEEEEEEEEEE I HOPE THIS LASTSSS FOREVERRRRRR";
+
+const typing = document.getElementById("typing");
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const message = document.getElementById("message");
+const music = document.getElementById("music");
+
+let i = 0;
+
+function type() {
+    if (i < text.length) {
+        typing.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 40);
+    }
+}
+
 type();
 
-const yes=document.getElementById("yes");
-const no=document.getElementById("no");
-const message=document.getElementById("message");
-const music=document.getElementById("music");
-const overlay=document.getElementById("overlay");
-
-// Remove overlay on first interaction to allow music autoplay
-function startMusic(){
-    music.currentTime=0;
-    music.play();
-    overlay.style.display="none";
-    document.removeEventListener('click', startMusic);
-    document.removeEventListener('touchstart', startMusic);
+function startMusic() {
+    music.play().catch(() => {});
 }
-document.addEventListener('click', startMusic);
-document.addEventListener('touchstart', startMusic);
+
+document.addEventListener("click", startMusic, { once: true });
+document.addEventListener("touchstart", startMusic, { once: true });
 
 // YES button
-yes.onclick=()=>{
-    music.currentTime=0;
-    music.play();
-    message.innerHTML="THANK YOU SOOOO MUCH CUTUUUUUU";
-    for(let i=0;i<180;i++){
-        let conf=document.createElement("div");
-        conf.className="confetti";
-        conf.style.left=Math.random()*100+"vw";
-        conf.style.background=`hsl(${Math.random()*360},100%,70%)`;
-        document.body.appendChild(conf);
-    }
-};
+yes.addEventListener("click", () => {
+    startMusic();
 
-// NO button escape
-let attempts=0;
-function moveNo(){
+    message.textContent = "THANK YOU SOOOO MUCH CUTUUUUUU";
+
+    for (let i = 0; i < 180; i++) {
+        const conf = document.createElement("div");
+        conf.className = "confetti";
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.background =
+            `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+        document.body.appendChild(conf);
+
+        setTimeout(() => conf.remove(), 3000);
+    }
+});
+
+// NO button escapes
+let attempts = 0;
+
+function moveNo() {
     attempts++;
-    let x=Math.random()*(window.innerWidth-120);
-    let y=Math.random()*(window.innerHeight-60);
-    no.style.position="absolute";
-    no.style.left=x+"px";
-    no.style.top=y+"px";
-    if(attempts>5){ no.innerHTML="Are you sure 😳"; }
-    if(attempts>8){ no.innerHTML="Fine YES ❤️"; }
-    if(attempts>10){ yes.click(); }
+
+    const maxX = Math.max(0, window.innerWidth - no.offsetWidth);
+    const maxY = Math.max(0, window.innerHeight - no.offsetHeight);
+
+    no.style.position = "fixed";
+    no.style.left = Math.random() * maxX + "px";
+    no.style.top = Math.random() * maxY + "px";
+
+    if (attempts > 5) {
+        no.textContent = "Are you sure 😳";
+    }
+
+    if (attempts > 8) {
+        no.textContent = "Fine YES ❤️";
+    }
+
+    if (attempts > 10) {
+        no.style.position = "relative";
+        no.style.left = "auto";
+        no.style.top = "auto";
+        message.textContent = "Take your time ❤️";
+    }
 }
-no.addEventListener("mouseover",moveNo);
-no.addEventListener("click",moveNo);
+
+no.addEventListener("mouseover", moveNo);
 
 // Floating hearts
-function createHeart(){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+10)+"px";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),8000);
-}
-setInterval(createHeart,300);
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
 
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(createHeart, 300);
 </script>
+
 </body>
 </html>
