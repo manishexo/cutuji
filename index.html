@@ -47,8 +47,10 @@ h1 {
 }
 
 img {
-    width: min(240px, 75vw);
-    max-width: 100%;
+    width: 320px;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 20px;
     margin-top: 20px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.4);
@@ -59,18 +61,12 @@ img:hover {
     transform: scale(1.05);
 }
 
-.buttons {
-    margin-top: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    position: relative;
-    z-index: 1000;
-    min-height: 65px;
+@media (max-width: 480px) {
+    img {
+        width: 85vw;
+        height: 220px;
+    }
 }
-
 button {
     padding: 15px 35px;
     font-size: 20px;
